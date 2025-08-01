@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicines - MedicoCare</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">🩺 MedicoCare</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medicines.html">Medicines</a></li>
+        <li><a href="cart.php">Cart</a></li>
+        <li><a href="contact.php">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Page Title -->
+  <section class="page-title">
+    <h1>All Medicines</h1>
+    <p>Explore our wide range of quality medicines</p>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <h2>Search & Filter</h2>
+    <div class="filter-controls">
+      <input type="text" id="searchInput" placeholder="Search medicines..." />
+      <select id="categorySelect">
+        <option value="">All Categories</option>
+        <option value="fever">Fever</option>
+        <option value="cough">Cough</option>
+        <option value="diabetes">Diabetes</option>
+        <option value="immunity">Immunity</option>
+        <option value="germ">Germ Protection</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+<!-- Products Grid -->
+<section class="product-listing">
+
+  <div class="product-card" data-category="fever">
+    <h3>Paracetamol 500mg</h3>
+    <p>For fever & pain relief</p>
+    <span>₹30</span>
+        <a href="add_to_cart.php?id=1&name=Paracetamol%20500mg&price=30" class="btn">Buy Now - ₹30</a>
+  </div>
+
+  <div class="product-card" data-category="cough">
+    <h3>Cough Syrup</h3>
+    <p>For dry & wet cough</p>
+    <span>₹85</span>
+    <a href="add_to_cart.php?id=2&name=Cough%20Syrup&price=85" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product-card" data-category="immunity">
+    <h3>Vitamin C Tablets</h3>
+    <p>Immunity booster</p>
+    <span>₹120</span>
+    <a href="add_to_cart.php?id=3&name=Vitamin%20C%20Tablets&price=120" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product-card" data-category="diabetes">
+    <h3>Diabetes Kit</h3>
+    <p>Blood sugar testing kit</p>
+    <span>₹499</span>
+    <a href="add_to_cart.php?id=4&name=Diabetes%20Kit&price=499" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product-card" data-category="fever">
+    <h3>Disprin Tablets</h3>
+    <p>For headache relief</p>
+    <span>₹15</span>
+    <a href="add_to_cart.php?id=5&name=Disprin%20Tablets&price=15" class="btn">Add to Cart</a>
+  </div>
+
+  <div class="product-card" data-category="germ">
+    <h3>Hand Sanitizer</h3>
+    <p>99.9% germ protection</p>
+    <span>₹55</span>
+    <a href="add_to_cart.php?id=6&name=Hand%20Sanitizer&price=55" class="btn">Add to Cart</a>
+  </div>
+
+</section>
+
+
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 MedicoCare. All rights reserved.</p>
+  </footer>
+
+  <!-- JS Filter Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("searchInput");
+      const categorySelect = document.getElementById("categorySelect");
+      const products = document.querySelectorAll(".product-card");
+
+      function filterProducts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categorySelect.value;
+
+        products.forEach(product => {
+          const title = product.querySelector("h3").textContent.toLowerCase();
+          const desc = product.querySelector("p").textContent.toLowerCase();
+          const category = product.getAttribute("data-category");
+
+          const matchText = title.includes(searchTerm) || desc.includes(searchTerm);
+          const matchCategory = selectedCategory === "" || category === selectedCategory;
+
+          if (matchText && matchCategory) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+
+      searchInput.addEventListener("input", filterProducts);
+      categorySelect.addEventListener("change", filterProducts);
+    });
+  </script>
+</body>
+</html>

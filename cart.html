@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - MedicoCare</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+</head>
+<style>
+    body {
+  font-family: 'Roboto', sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.cart-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background: #fafafa;
+  transition: box-shadow 0.3s;
+}
+
+.cart-item:hover {
+  box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.cart-left h3 {
+  margin: 0 0 10px;
+  color: #222;
+}
+
+.cart-left p {
+  margin: 5px 0;
+  color: #444;
+}
+
+.remove-btn {
+  background: #ff4d4d;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.remove-btn:hover {
+  background: #d90000;
+}
+
+.cart-summary {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.cart-summary h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.btn {
+  background: #000;
+  color: #fff;
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #333;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+  margin-top: 40px;
+}
+                   
+</style>
+<body>
+
+  <!-- Header -->
+   <header>
+    <nav class="navbar">
+      <div class="logo">🩺 MedicoCare</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medicines.html">Medicines</a></li>
+        <li><a href="cart.php">Cart</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Cart Section -->
+  <section class="cart-container">
+    <h1>Your Shopping Cart 🛒</h1>
+
+    {% if cart_items %}
+      <div class="cart-items">
+        {% for item in cart_items %}
+          <div class="cart-item">
+            <div class="cart-left">
+              <h3>{{ item.name }}</h3>
+              <p><strong>Qty:</strong> {{ item.qty }}</p>
+              <p><strong>Price:</strong> ₹{{ item.price }}</p>
+              <p><strong>Total:</strong> ₹{{ item.total }}</p>
+            </div>
+            <div class="cart-right">
+              <a href="/remove/{{ item.id }}" class="remove-btn">❌ Remove</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="cart-summary">
+        <h2>Grand Total: ₹{{ total }}</h2>
+        <a href="/checkout" class="btn">Proceed to Checkout ➡️</a>
+      </div>
+    {% else %}
+      <p class="empty-cart">Your cart is empty 😕</p>
+    {% endif %}
+  </section>
+
+</body> 
+</html> 
